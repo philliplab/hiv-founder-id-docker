@@ -88,15 +88,19 @@ RUN apt-get update \
   && cd /usr/local/src/phyml \
   && sh ./autogen.sh \
   && ./configure --enable-phyml \
-  && make \
-  # cloning in the pipeline
-  && su docker -c "git clone https://github.com/philliplab/hiv-founder-id /home/docker/hiv-founder-id" \
+  && make
+
+RUN su docker -c "git clone https://github.com/philliplab/hiv-founder-id /home/docker/hiv-founder-id" \
   && su docker -c "chmod u+x /home/docker/hiv-founder-id/*" \
   && su docker -c "cd ~/hiv-founder-id/tests; ./test_pipeline.R --pipeline_dir=/home/docker/hiv-founder-id --build_command_scripts" \
-  && ln -s /usr/local/src/phyml/src/phyml /home/docker/hiv-founder-id/phyml
+  && ln -s /usr/local/src/phyml/src/phyml /home/docker/hiv-founder-id/phyml \
+  && su docker -c "mkdir /home/docker/example" \
+  && su docker -c "cp /home/docker/hiv-founder-id/tests/example_data/* /home/docker/example/." \
+  && su docker -c "cp /home/docker/hiv-founder-id/tests/example_docker* /home/docker/." \
+  && echo "hack to rebuild this layer : 13" > /home/docker/hack_script.txt
 
 USER docker
 
-WORKDIR /home/docker/hiv-founder-id
+WORKDIR /home/docker
 
 ENTRYPOINT ["/bin/bash"]
