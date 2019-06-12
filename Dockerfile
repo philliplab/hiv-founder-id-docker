@@ -83,7 +83,7 @@ RUN apt-get update \
   && cd phyml \
   && git checkout 8eb35001287ab083762aad1d9e68dcc462fdad1f \
   && cd /usr/local/src/phyml/src \
-  && perl -0777 -i.bla -pe 's/$\s*tree\s*= mat->tree;\n\s*tree->mat\s*= mat;/tree = mat->tree;\n      tree->mat = mat;\n      Print_Mat(mat);\n      Warn_And_Exit("");\n/igs' utilities.c \
+  && perl -0777 -i.bla -pe 's/$\s*tree\s*= mat->tree;\n\s*tree->mat\s*= mat;/tree = mat->tree;\n      tree->mat = mat;\n      Print_Mat(mat);\n      Exit("");\n/igs' utilities.c \
   && rm utilities.c.bla \
   && cd /usr/local/src/phyml \
   && sh ./autogen.sh \
@@ -97,7 +97,7 @@ RUN su docker -c "git clone https://github.com/philliplab/hiv-founder-id /home/d
   && su docker -c "mkdir /home/docker/example" \
   && su docker -c "cp /home/docker/hiv-founder-id/tests/example_data_v2/* /home/docker/example/." \
   && su docker -c "cp /home/docker/hiv-founder-id/tests/example_docker* /home/docker/." \
-  && echo "hack to rebuild this layer : 20" > /tmp/hack.txt
+  && echo "hack to rebuild this layer : 21" > /tmp/hack.txt
 
 USER docker
 
