@@ -96,8 +96,8 @@ RUN su docker -c "git clone https://github.com/philliplab/hiv-founder-id /home/d
   && ln -s /usr/local/src/phyml/src/phyml /home/docker/hiv-founder-id/phyml \
   && su docker -c "mkdir /home/docker/example" \
   && su docker -c "cp /home/docker/hiv-founder-id/tests/example_data_v2/* /home/docker/example/." \
-  && su docker -c "cp /home/docker/hiv-founder-id/tests/example_docker* /home/docker/." \
-  && echo "hack to rebuild this layer : 23" > /tmp/hack.txt
+  && su docker -c "cp /home/docker/hiv-founder-id/tests/example_docker.sh /home/docker/." \
+  && echo "hack to rebuild this layer : 24" > /tmp/hack.txt
 
 USER docker
 
